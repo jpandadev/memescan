@@ -1,33 +1,44 @@
 {
   "name": "MemeScan - Bloomberg for Meme Coins",
   "short_name": "MemeScan",
-  "description": "The ultimate meme coin scanner for TON blockchain. Track trending tokens, detect rug pulls, and find the next 100x gem.",
+  "description": "The ultimate meme coin scanner for TON blockchain. Track trending tokens, detect rug pulls, find gems, and race in CryptoKart!",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a1a0a",
-  "theme_color": "#22c55e",
+  "theme_color": "#00FF88",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/profile-20picture-20memescanton-bot-400x400-20-282-29.png",
+      "src": "/media/icons/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/profile-20picture-20memescanton-bot-400x400-20-282-29.png",
+      "src": "/media/icons/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["finance", "crypto", "utilities"],
+  "categories": ["finance", "cryptocurrency", "games", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
   "screenshots": [
     {
-      "src": "/images/bot-20welcome-20image16x9-1280x720-20-281-29.png",
-      "sizes": "1280x720",
+      "src": "/media/og/memescan-og.png",
+      "sizes": "1200x630",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "MemeScan Dashboard"
     }
-  ]
+  ],
+  "related_applications": [
+    {
+      "platform": "telegram",
+      "url": "https://t.me/MemeScanBot"
+    }
+  ],
+  "prefer_related_applications": false
 }

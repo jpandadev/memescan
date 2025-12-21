@@ -15,7 +15,7 @@ export async function fetchInterestRates() {
     const data = await response.json()
     return data
   } catch (error) {
-    console.error("[v0] Interest rate fetch error:", error)
+    console.error("[MemeScan] Interest rate fetch error:", error)
     return []
   }
 }
@@ -47,7 +47,7 @@ export async function fetchForexRates() {
     const data = await response.json()
     return data
   } catch (error) {
-    console.error("[v0] Forex fetch error:", error)
+    console.error("[MemeScan] Forex fetch error:", error)
     // Return mock data on error
     return {
       base: "USD",
@@ -76,7 +76,7 @@ export async function fetchCommodityPrices(commodity = "crude_oil") {
     const data = await response.json()
     return data
   } catch (error) {
-    console.error("[v0] Commodity fetch error:", error)
+    console.error("[MemeScan] Commodity fetch error:", error)
     return null
   }
 }
@@ -94,7 +94,7 @@ export async function fetchCryptoPrice(symbol = "BTCUSDT") {
     const data = await response.json()
     return data
   } catch (error) {
-    console.error("[v0] Crypto fetch error:", error)
+    console.error("[MemeScan] Crypto fetch error:", error)
     return null
   }
 }
@@ -112,7 +112,7 @@ export async function fetchStockPrice(ticker: string) {
     const data = await response.json()
     return data
   } catch (error) {
-    console.error("[v0] Stock fetch error:", error)
+    console.error("[MemeScan] Stock fetch error:", error)
     return null
   }
 }
@@ -126,7 +126,7 @@ export async function fetchMultipleCryptos() {
       ETH: eth,
     }
   } catch (error) {
-    console.error("[v0] Multiple crypto fetch error:", error)
+    console.error("[MemeScan] Multiple crypto fetch error:", error)
     return null
   }
 }
@@ -154,7 +154,7 @@ export async function fetchElectricityPrices() {
 
     return prices
   } catch (error) {
-    console.error("[v0] Electricity prices fetch error:", error)
+    console.error("[MemeScan] Electricity prices fetch error:", error)
     // Return mock data
     return [
       { country: "Japan", cost: 120, source: "JEPX Est." },

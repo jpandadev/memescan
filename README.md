@@ -1,30 +1,62 @@
-# API Marketplace Dashboard
+# MemeScan - Bloomberg for Meme Coins on TON
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+> Part of the **MemeSeal Ecosystem** 🦭
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/waterworth1/v0-api-marketplace-dashboard)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/mWZ6dwivSul)
+The ultimate meme coin scanner for TON blockchain. Track trending tokens, detect rug pulls, find 100x gems, and race in CryptoKart!
 
-## Overview
+## Features
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+- **Token Scanner** - Real-time tracking of TON meme coins with safety ratings
+- **Rug Detector** - AI-powered detection of potential scams and rug pulls
+- **CryptoKart** - Race and bet against crypto personalities
+- **Portfolio** - Track your holdings and performance
+- **Rewards** - Daily missions, streaks, and referral bonuses
+- **Mint Studio** - Launch your own token (coming soon)
 
-## Deployment
+## Ecosystem
 
-Your project is live at:
+```
+MemeSeal Ecosystem (TON)
+├── MemeSeal Bot    - Blockchain timestamping & proof
+├── SealBet         - Prediction markets
+└── MemeScan        - Token scanner + games (this app)
+```
 
-**[https://vercel.com/waterworth1/v0-api-marketplace-dashboard](https://vercel.com/waterworth1/v0-api-marketplace-dashboard)**
+## Tech Stack
 
-## Build your app
+- **Framework**: Next.js 16 + React 19
+- **Styling**: Tailwind CSS 4 + shadcn/ui
+- **Blockchain**: TON Connect
+- **Platform**: Telegram Mini App
 
-Continue building your app on:
+## Development
 
-**[https://v0.app/chat/mWZ6dwivSul](https://v0.app/chat/mWZ6dwivSul)**
+```bash
+# Install dependencies
+pnpm install
 
-## How It Works
+# Start dev server
+pnpm dev
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+# Build for production
+pnpm build
+```
+
+## Environment Variables
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_TONCONNECT_MANIFEST_URL=https://your-domain/tonconnect-manifest.json
+NEXT_PUBLIC_TON_API_KEY=your-tonapi-key
+```
+
+## Links
+
+- Website: [memescan.ton.app](https://memescan.ton.app)
+- Twitter: [@MemeSealTON](https://x.com/MemeSealTON)
+- Telegram: [@MemeScanBot](https://t.me/MemeScanBot)
+
+## License
+
+MIT - MemeSeal Team 2025
