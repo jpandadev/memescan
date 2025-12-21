@@ -1,91 +1,85 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bitcoin, TrendingUp, TrendingDown } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { TrendingUp, TrendingDown, Zap } from "lucide-react"
 import { useEffect, useState } from "react"
-import { fetchMultipleCryptos } from "@/lib/api"
+import { useTelegram } from "./telegram-provider"
 
-interface CryptoData {
+interface TokenData {
   symbol: string
   name: string
   price: string
   change: string
   positive: boolean
+  mcap: string
 }
 
 export function CryptoWatch() {
-  const [cryptos, setCryptos] = useState<CryptoData[]>([
-    { name: "Bitcoin", symbol: "BTC", price: "$43,782", change: "+5.2%", positive: true },
-    { name: "Ethereum", symbol: "ETH", price: "$2,289", change: "+3.8%", positive: true },
-    { name: "Solana", symbol: "SOL", price: "$108", change: "+12.4%", positive: true },
-    { name: "Dogecoin", symbol: "DOGE", price: "$0.089", change: "-2.1%", positive: false },
+  const { hapticFeedback } = useTelegram()
+  const [tokens, setTokens] = useState<TokenData[]>([
+    { name: "Toncoin", symbol: "TON", price: "$2.45", change: "+12.5%", positive: true, mcap: "$8.4B" },
+    { name: "Notcoin", symbol: "NOT", price: "$0.0089", change: "+45.2%", positive: true, mcap: "$890M" },
+    { name: "Dogs", symbol: "DOGS", price: "$0.00042", change: "-3.2%", positive: false, mcap: "$420M" },
+    { name: "Hamster", symbol: "HMSTR", price: "$0.0037", change: "+8.7%", positive: true, mcap: "$310M" },
   ])
 
+  // Simulate price updates
   useEffect(() => {
-    async function loadCryptos() {
-      try {
-        const data = await fetchMultipleCryptos()
-
-        if (data) {
-          setCryptos((prev) =>
-            prev.map((crypto) => {
-              if (crypto.symbol === "BTC" && data.BTC) {
-                return {
-                  ...crypto,
-                  price: `$${data.BTC.price?.toLocaleString() || crypto.price}`,
-                }
-              }
-              if (crypto.symbol === "ETH" && data.ETH) {
-                return {
-                  ...crypto,
-                  price: `$${data.ETH.price?.toLocaleString() || crypto.price}`,
-                }
-              }
-              return crypto
-            }),
-          )
-        }
-      } catch (error) {
-        console.error("[v0] Crypto load error:", error)
-      }
-    }
-
-    loadCryptos()
-    const interval = setInterval(loadCryptos, 60000)
+    const interval = setInterval(() => {
+      setTokens((prev) =>
+        prev.map((token) => {
+          const changeVal = (Math.random() - 0.5) * 5
+          const isPositive = changeVal >= 0
+          return {
+            ...token,
+            change: `${isPositive ? "+" : ""}${changeVal.toFixed(1)}%`,
+            positive: isPositive,
+          }
+        }),
+      )
+    }, 5000)
     return () => clearInterval(interval)
   }, [])
 
   return (
     <Card className="border-2">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold flex items-center gap-2">
-          <Bitcoin className="w-5 h-5 text-primary" />
-          <span className="truncate">CRYPTO ZONE</span>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg font-bold flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary" />
+          <span className="truncate">TOP TON TOKENS</span>
+          <Badge className="bg-primary/20 text-primary text-[10px]">LIVE</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3">
-          {cryptos.map((crypto) => (
+        <div className="space-y-2">
+          {tokens.map((token) => (
             <div
-              key={crypto.symbol}
-              className="flex items-center justify-between p-3 bg-muted/50 border border-border rounded-lg hover:border-primary transition-colors cursor-pointer min-w-0"
+              key={token.symbol}
+              className="flex items-center justify-between p-2 sm:p-3 bg-muted/50 border border-border rounded-lg hover:border-primary transition-colors cursor-pointer"
+              onClick={() => hapticFeedback("light")}
             >
               <div className="min-w-0 flex-1">
-                <div className="font-bold truncate">{crypto.symbol}</div>
-                <div className="text-xs text-muted-foreground truncate">{crypto.name}</div>
+                <div className="font-bold text-sm text-primary">{token.symbol}</div>
+                <div className="text-[10px] text-muted-foreground truncate">{token.name}</div>
               </div>
 
-              <div className="text-right flex-shrink-0 ml-2">
-                <div className="font-bold font-mono text-sm truncate">{crypto.price}</div>
+              <div className="text-center px-2 flex-shrink-0">
+                <div className="text-[10px] text-muted-foreground">MCap</div>
+                <div className="text-xs font-mono">{token.mcap}</div>
+              </div>
+
+              <div className="text-right flex-shrink-0">
+                <div className="font-bold font-mono text-sm">{token.price}</div>
                 <div
-                  className={`text-xs font-mono flex items-center justify-end gap-1 ${crypto.positive ? "text-chart-1" : "text-destructive"}`}
+                  className={`text-xs font-mono flex items-center justify-end gap-1 ${token.positive ? "text-chart-1" : "text-destructive"}`}
                 >
-                  {crypto.positive ? (
+                  {token.positive ? (
                     <TrendingUp className="w-3 h-3 flex-shrink-0" />
                   ) : (
                     <TrendingDown className="w-3 h-3 flex-shrink-0" />
                   )}
-                  <span className="truncate">{crypto.change}</span>
+                  <span>{token.change}</span>
                 </div>
               </div>
             </div>

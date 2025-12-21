@@ -2,43 +2,60 @@
 
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import { Rocket, Flame, Bitcoin, TrendingUp } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TrendingUp, Shield, Zap } from "lucide-react"
+import { useTelegram } from "./telegram-provider"
 
 export function HeroBanner() {
+  const { hapticFeedback } = useTelegram()
+
   return (
     <div className="relative w-full h-48 sm:h-64 md:h-80 rounded-xl overflow-hidden border-2 border-primary">
-      <Image src="/images/winner.jpeg" alt="Blockchain Burnout - To The Moon" fill className="object-cover" priority />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
+      <Image
+        src="/images/bot-20welcome-20image16x9-1280x720-20-281-29.png"
+        alt="MemeScan - Your Bloomberg for Meme Coins"
+        fill
+        className="object-cover"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
 
       <div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
         <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
           <Badge className="bg-primary text-primary-foreground text-[10px] sm:text-xs">
-            <Rocket className="w-3 h-3 mr-1" />
-            MOON MISSION
+            <Zap className="w-3 h-3 mr-1" />
+            TON BLOCKCHAIN
           </Badge>
-          <Badge variant="outline" className="border-chart-1 text-chart-1 text-[10px] sm:text-xs">
-            <Flame className="w-3 h-3 mr-1" />
-            HOT
+          <Badge variant="outline" className="border-accent text-accent text-[10px] sm:text-xs">
+            <Shield className="w-3 h-3 mr-1" />
+            RUG DETECTOR
           </Badge>
         </div>
 
         <h2 className="text-xl sm:text-2xl md:text-4xl font-black font-[family-name:var(--font-orbitron)] mb-1 sm:mb-2 text-balance">
-          <span className="text-primary">BLOCKCHAIN</span> <span className="text-chart-5">BURNOUT</span>
+          <span className="text-primary text-glow">YOUR BLOOMBERG</span>
+          <br />
+          <span className="text-accent">FOR MEME COINS</span>
         </h2>
 
         <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-md mb-3 sm:mb-4 line-clamp-2">
-          Nation-state arbitrage. Zero-cost energy. Maximum gains.
+          Track trending tokens. Detect rug pulls. Find the next 100x gem on TON.
         </p>
 
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono">
-          <div className="flex items-center gap-1 text-chart-1">
-            <Bitcoin className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>BTC +12.4%</span>
-          </div>
-          <div className="flex items-center gap-1 text-chart-2">
-            <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>$2.8M P/L</span>
-          </div>
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button size="sm" className="font-bold text-xs" onClick={() => hapticFeedback("medium")}>
+            <TrendingUp className="w-3 h-3 mr-1" />
+            SCAN TOKENS
+          </Button>
+          <a href="https://x.com/MemeSealTON" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outline"
+              size="sm"
+              className="font-bold text-xs border-primary text-primary bg-transparent"
+            >
+              FOLLOW US
+            </Button>
+          </a>
         </div>
       </div>
     </div>

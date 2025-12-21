@@ -10,42 +10,39 @@ interface TickerItem {
   changePercent: number
 }
 
-const initialStocks: TickerItem[] = [
-  { symbol: "TSLA", price: 242.84, change: 12.4, changePercent: 5.4 },
-  { symbol: "AAPL", price: 191.24, change: -2.14, changePercent: -1.1 },
-  { symbol: "NVDA", price: 495.22, change: 38.7, changePercent: 8.5 },
-  { symbol: "MSFT", price: 378.91, change: 5.2, changePercent: 1.4 },
-  { symbol: "GOOGL", price: 139.5, change: 1.8, changePercent: 1.3 },
-  { symbol: "META", price: 356.78, change: -4.2, changePercent: -1.2 },
-  { symbol: "AMZN", price: 151.94, change: 2.5, changePercent: 1.7 },
-  { symbol: "GME", price: 23.67, change: 7.2, changePercent: 43.5 },
-  { symbol: "AMC", price: 6.89, change: 1.5, changePercent: 27.8 },
-  { symbol: "PLTR", price: 18.45, change: 2.3, changePercent: 14.2 },
-  { symbol: "COIN", price: 156.78, change: 14.2, changePercent: 9.9 },
-  { symbol: "NFLX", price: 487.23, change: -8.4, changePercent: -1.7 },
+const initialTokens: TickerItem[] = [
+  { symbol: "TON", price: 2.45, change: 0.28, changePercent: 12.5 },
+  { symbol: "NOT", price: 0.0089, change: 0.0028, changePercent: 45.2 },
+  { symbol: "DOGS", price: 0.00042, change: -0.00001, changePercent: -3.2 },
+  { symbol: "HMSTR", price: 0.0037, change: 0.0003, changePercent: 8.7 },
+  { symbol: "CATI", price: 0.0046, change: -0.00005, changePercent: -1.2 },
+  { symbol: "PTON", price: 0.000012, change: 0.000007, changePercent: 156.8 },
+  { symbol: "JETTON", price: 0.089, change: 0.012, changePercent: 15.6 },
+  { symbol: "GRAM", price: 0.0042, change: 0.0003, changePercent: 8.3 },
+  { symbol: "SCALE", price: 0.0015, change: -0.0001, changePercent: -6.2 },
+  { symbol: "REDO", price: 0.023, change: 0.004, changePercent: 21.1 },
 ]
 
 export function LiveTicker() {
-  const [stocks, setStocks] = useState(initialStocks)
+  const [tokens, setTokens] = useState(initialTokens)
   const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     if (isPaused) return
 
     const interval = setInterval(() => {
-      setStocks((prev) =>
-        prev.map((stock) => {
-          // Simulate real-time price changes
-          const priceChange = (Math.random() - 0.5) * 2
-          const newPrice = stock.price + priceChange
-          const newChange = stock.change + priceChange
+      setTokens((prev) =>
+        prev.map((token) => {
+          const priceChange = (Math.random() - 0.5) * token.price * 0.02
+          const newPrice = Math.max(0.000001, token.price + priceChange)
+          const newChange = token.change + priceChange
           const newChangePercent = (newChange / (newPrice - newChange)) * 100
 
           return {
-            ...stock,
+            ...token,
             price: newPrice,
             change: newChange,
-            changePercent: newChangePercent,
+            changePercent: Math.max(-99, Math.min(999, newChangePercent)),
           }
         }),
       )
@@ -54,31 +51,37 @@ export function LiveTicker() {
     return () => clearInterval(interval)
   }, [isPaused])
 
-  // Duplicate items for seamless loop
-  const duplicatedStocks = [...stocks, ...stocks]
+  const duplicatedTokens = [...tokens, ...tokens]
+
+  const formatPrice = (price: number) => {
+    if (price < 0.0001) return `$${price.toFixed(8)}`
+    if (price < 0.01) return `$${price.toFixed(6)}`
+    if (price < 1) return `$${price.toFixed(4)}`
+    return `$${price.toFixed(2)}`
+  }
 
   return (
     <div
-      className="relative overflow-hidden bg-card border-y-2 border-primary py-3"
+      className="relative overflow-hidden bg-card border-y-2 border-primary py-2 sm:py-3"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="flex animate-ticker hover:animation-pause">
-        {duplicatedStocks.map((stock, index) => (
+        {duplicatedTokens.map((token, index) => (
           <div
-            key={`${stock.symbol}-${index}`}
-            className="flex items-center gap-3 px-6 border-r border-border/50 whitespace-nowrap"
+            key={`${token.symbol}-${index}`}
+            className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 border-r border-border/50 whitespace-nowrap"
           >
-            <div className="font-bold text-sm">{stock.symbol}</div>
-            <div className="font-mono text-sm">${stock.price.toFixed(2)}</div>
+            <div className="font-bold text-xs sm:text-sm text-primary">{token.symbol}</div>
+            <div className="font-mono text-xs sm:text-sm">{formatPrice(token.price)}</div>
             <div
-              className={`flex items-center gap-1 text-xs font-mono font-bold ${
-                stock.change >= 0 ? "text-chart-1" : "text-destructive"
+              className={`flex items-center gap-1 text-[10px] sm:text-xs font-mono font-bold ${
+                token.changePercent >= 0 ? "text-chart-1" : "text-destructive"
               }`}
             >
-              {stock.change >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-              {stock.changePercent >= 0 ? "+" : ""}
-              {stock.changePercent.toFixed(2)}%
+              {token.changePercent >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+              {token.changePercent >= 0 ? "+" : ""}
+              {token.changePercent.toFixed(1)}%
             </div>
           </div>
         ))}

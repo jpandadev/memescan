@@ -4,103 +4,105 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Blockchain Burnout light theme - cyberpunk aesthetic */
-  --background: oklch(0.98 0.01 300);
-  --foreground: oklch(0.12 0.02 300);
+  /* MemeScan light theme - Matrix green terminal */
+  --background: oklch(0.98 0.01 145);
+  --foreground: oklch(0.12 0.02 145);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0.02 300);
+  --card-foreground: oklch(0.12 0.02 145);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0.02 300);
+  --popover-foreground: oklch(0.12 0.02 145);
 
-  /* Hot pink/magenta primary - Blockchain Burnout vibe */
-  --primary: oklch(0.65 0.25 330);
-  --primary-foreground: oklch(0.98 0 0);
+  /* Neon green primary - TON/Matrix style */
+  --primary: oklch(0.7 0.22 145);
+  --primary-foreground: oklch(0.1 0 0);
 
   --secondary: oklch(0.92 0.02 180);
   --secondary-foreground: oklch(0.12 0 0);
 
-  --muted: oklch(0.95 0.01 300);
-  --muted-foreground: oklch(0.5 0.02 300);
+  --muted: oklch(0.95 0.01 145);
+  --muted-foreground: oklch(0.5 0.02 145);
 
-  --accent: oklch(0.75 0.2 180);
+  /* Cyan accent - TON blue */
+  --accent: oklch(0.7 0.15 200);
   --accent-foreground: oklch(0.12 0 0);
 
-  /* Neon green for gains, hot red for losses */
+  /* Red for losses/alerts */
   --destructive: oklch(0.55 0.25 25);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.88 0.02 300);
-  --input: oklch(0.88 0.02 300);
-  --ring: oklch(0.65 0.25 330);
+  --border: oklch(0.88 0.02 145);
+  --input: oklch(0.88 0.02 145);
+  --ring: oklch(0.7 0.22 145);
 
-  /* Chart colors - cyberpunk neons */
+  /* Chart colors - terminal greens and cyans */
   --chart-1: oklch(0.7 0.22 145);
-  --chart-2: oklch(0.65 0.25 330);
-  --chart-3: oklch(0.55 0.25 25);
-  --chart-4: oklch(0.7 0.2 180);
+  --chart-2: oklch(0.7 0.15 200);
+  --chart-3: oklch(0.6 0.25 25);
+  --chart-4: oklch(0.65 0.18 180);
   --chart-5: oklch(0.8 0.18 85);
 
   --radius: 0.5rem;
 
-  --sidebar: oklch(0.98 0.01 300);
-  --sidebar-foreground: oklch(0.12 0.02 300);
-  --sidebar-primary: oklch(0.65 0.25 330);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar: oklch(0.98 0.01 145);
+  --sidebar-foreground: oklch(0.12 0.02 145);
+  --sidebar-primary: oklch(0.7 0.22 145);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
   --sidebar-accent: oklch(0.92 0.02 180);
   --sidebar-accent-foreground: oklch(0.12 0 0);
-  --sidebar-border: oklch(0.88 0.02 300);
-  --sidebar-ring: oklch(0.65 0.25 330);
+  --sidebar-border: oklch(0.88 0.02 145);
+  --sidebar-ring: oklch(0.7 0.22 145);
 }
 
 .dark {
-  /* Deep dark with purple tint - cyberpunk terminal aesthetic */
-  --background: oklch(0.1 0.02 280);
-  --foreground: oklch(0.95 0.01 300);
+  /* Deep dark terminal - Matrix/TON aesthetic */
+  --background: oklch(0.08 0.02 145);
+  --foreground: oklch(0.85 0.15 145);
 
-  --card: oklch(0.13 0.025 280);
-  --card-foreground: oklch(0.95 0.01 300);
+  --card: oklch(0.1 0.025 145);
+  --card-foreground: oklch(0.85 0.15 145);
 
-  --popover: oklch(0.13 0.025 280);
-  --popover-foreground: oklch(0.95 0.01 300);
+  --popover: oklch(0.1 0.025 145);
+  --popover-foreground: oklch(0.85 0.15 145);
 
-  /* Hot pink primary - neon glow */
-  --primary: oklch(0.7 0.28 330);
-  --primary-foreground: oklch(0.1 0 0);
+  /* Bright neon green primary */
+  --primary: oklch(0.75 0.25 145);
+  --primary-foreground: oklch(0.08 0 0);
 
-  --secondary: oklch(0.2 0.03 280);
-  --secondary-foreground: oklch(0.95 0.01 300);
+  --secondary: oklch(0.15 0.03 145);
+  --secondary-foreground: oklch(0.85 0.15 145);
 
-  --muted: oklch(0.16 0.025 280);
-  --muted-foreground: oklch(0.55 0.02 300);
+  --muted: oklch(0.12 0.02 145);
+  --muted-foreground: oklch(0.5 0.1 145);
 
-  --accent: oklch(0.6 0.22 180);
-  --accent-foreground: oklch(0.1 0 0);
+  /* TON cyan accent */
+  --accent: oklch(0.65 0.18 200);
+  --accent-foreground: oklch(0.08 0 0);
 
-  /* Vivid neons on dark */
+  /* Vivid red for alerts */
   --destructive: oklch(0.6 0.28 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.22 0.03 280);
-  --input: oklch(0.22 0.03 280);
-  --ring: oklch(0.7 0.28 330);
+  --border: oklch(0.18 0.04 145);
+  --input: oklch(0.18 0.04 145);
+  --ring: oklch(0.75 0.25 145);
 
-  /* Electric neon colors pop on black */
+  /* Neon colors for charts */
   --chart-1: oklch(0.75 0.25 145);
-  --chart-2: oklch(0.7 0.28 330);
+  --chart-2: oklch(0.7 0.18 200);
   --chart-3: oklch(0.65 0.28 25);
-  --chart-4: oklch(0.75 0.22 180);
+  --chart-4: oklch(0.7 0.2 180);
   --chart-5: oklch(0.85 0.2 85);
 
-  --sidebar: oklch(0.1 0.02 280);
-  --sidebar-foreground: oklch(0.95 0.01 300);
-  --sidebar-primary: oklch(0.7 0.28 330);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.2 0.03 280);
-  --sidebar-accent-foreground: oklch(0.95 0.01 300);
-  --sidebar-border: oklch(0.22 0.03 280);
-  --sidebar-ring: oklch(0.7 0.28 330);
+  --sidebar: oklch(0.08 0.02 145);
+  --sidebar-foreground: oklch(0.85 0.15 145);
+  --sidebar-primary: oklch(0.75 0.25 145);
+  --sidebar-primary-foreground: oklch(0.08 0 0);
+  --sidebar-accent: oklch(0.15 0.03 145);
+  --sidebar-accent-foreground: oklch(0.85 0.15 145);
+  --sidebar-border: oklch(0.18 0.04 145);
+  --sidebar-ring: oklch(0.75 0.25 145);
 }
 
 @theme inline {
@@ -152,6 +154,20 @@
     @apply bg-background text-foreground;
   }
 
+  /* Telegram Mini App safe areas */
+  :root {
+    --tg-viewport-height: 100vh;
+    --tg-viewport-stable-height: 100vh;
+  }
+
+  /* Mobile-first viewport handling */
+  html,
+  body {
+    height: 100%;
+    height: var(--tg-viewport-stable-height, 100vh);
+    overflow-x: hidden;
+  }
+
   @keyframes ticker {
     0% {
       transform: translateX(0);
@@ -169,19 +185,24 @@
     animation-play-state: paused;
   }
 
-  /* Added neon glow effects */
+  /* Matrix neon glow effect */
   @keyframes neon-pulse {
     0%,
     100% {
-      box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary));
+      box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
     }
     50% {
-      box-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary));
+      box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
     }
   }
 
   .neon-glow {
     animation: neon-pulse 2s ease-in-out infinite;
+  }
+
+  /* Text glow for terminal effect */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
   }
 
   @keyframes slide-up {
@@ -197,5 +218,29 @@
 
   .animate-slide-up {
     animation: slide-up 0.5s ease-out forwards;
+  }
+
+  /* Matrix rain effect */
+  @keyframes matrix-rain {
+    0% {
+      transform: translateY(-100%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .animate-matrix {
+    animation: matrix-rain 10s linear infinite;
+  }
+
+  /* PWA standalone mode styles */
+  @media (display-mode: standalone) {
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
   }
 }
