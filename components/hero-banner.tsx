@@ -43,10 +43,12 @@ export function HeroBanner() {
         </p>
 
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <Button size="sm" className="font-bold text-xs" onClick={() => hapticFeedback("medium")}>
-            <TrendingUp className="w-3 h-3 mr-1" />
-            SCAN TOKENS
-          </Button>
+          <a href="https://t.me/MemeScanTON_bot" target="_blank" rel="noopener noreferrer">
+            <Button size="sm" className="font-bold text-xs" onClick={() => hapticFeedback("medium")}>
+              <TrendingUp className="w-3 h-3 mr-1" />
+              SCAN TOKENS
+            </Button>
+          </a>
           <a href="https://x.com/MemeSealTON" target="_blank" rel="noopener noreferrer">
             <Button
               variant="outline"

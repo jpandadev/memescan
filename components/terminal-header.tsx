@@ -149,7 +149,13 @@ export function TerminalHeader() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="ghost" size="icon" className="hidden md:inline-flex h-8 w-8">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden md:inline-flex h-8 w-8 opacity-50 cursor-not-allowed"
+              disabled
+              title="Settings coming soon"
+            >
               <Settings className="w-4 h-4" />
             </Button>
 
