@@ -1,6 +1,12 @@
 "use server"
 
-const API_NINJAS_KEY = process.env.NEXT_PUBLIC_API_NINJAS_KEY || "mHBzbxJnIQV9owM9qgj5Wg==TCvlEv90tJ4CadWw"
+// Server-side only - never expose API keys to client
+const API_NINJAS_KEY = process.env.API_NINJAS_KEY || ""
+
+// Validate we have the key in production
+if (!API_NINJAS_KEY && process.env.NODE_ENV === "production") {
+  console.warn("[MemeScan] API_NINJAS_KEY not set - API calls will fail")
+}
 
 export async function fetchInterestRates() {
   try {

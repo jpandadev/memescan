@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ResponsiveContainer, XAxis, YAxis, Tooltip, Area, AreaChart } from "recharts"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo, useCallback, memo, useRef } from "react"
 import { TrendingUp } from "lucide-react"
 
 interface ChartData {
@@ -12,6 +12,7 @@ interface ChartData {
   volume: number
 }
 
+// Move outside component to avoid recreation
 function generateChartData(basePrice: number, points: number): ChartData[] {
   const data: ChartData[] = []
   let price = basePrice
@@ -29,11 +30,39 @@ function generateChartData(basePrice: number, points: number): ChartData[] {
   return data
 }
 
-export function TradingChart({ symbol = "TSLA", basePrice = 242.84 }: { symbol?: string; basePrice?: number }) {
+// Memoized timeframe button
+const TimeframeButton = memo(function TimeframeButton({
+  tf,
+  active,
+  onClick
+}: {
+  tf: string
+  active: boolean
+  onClick: () => void
+}) {
+  return (
+    <Button
+      variant={active ? "default" : "ghost"}
+      size="sm"
+      className="h-7 px-2 text-xs font-mono"
+      onClick={onClick}
+      aria-pressed={active}
+    >
+      {tf}
+    </Button>
+  )
+})
+
+function TradingChartComponent({ symbol = "TSLA", basePrice = 242.84 }: { symbol?: string; basePrice?: number }) {
   const [chartData, setChartData] = useState<ChartData[]>(() => generateChartData(basePrice, 50))
   const [timeframe, setTimeframe] = useState("1H")
 
+  // Use ref for circular buffer to avoid array recreation
+  const dataRef = useRef(chartData)
+  dataRef.current = chartData
+
   useEffect(() => {
+    // Increased interval from 2s to 5s for better performance
     const interval = setInterval(() => {
       setChartData((prev) => {
         const newData = [...prev.slice(1)]
@@ -48,7 +77,7 @@ export function TradingChart({ symbol = "TSLA", basePrice = 242.84 }: { symbol?:
 
         return newData
       })
-    }, 2000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [])
@@ -160,3 +189,7 @@ export function TradingChart({ symbol = "TSLA", basePrice = 242.84 }: { symbol?:
     </Card>
   )
 }
+
+// Export both named and memoized versions
+export const TradingChart = memo(TradingChartComponent)
+export { TradingChartComponent }

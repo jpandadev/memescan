@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, memo, useMemo, useCallback } from "react"
 import { TrendingUp, TrendingDown } from "lucide-react"
 
 interface TickerItem {
@@ -23,6 +23,32 @@ const initialTokens: TickerItem[] = [
   { symbol: "REDO", price: 0.023, change: 0.004, changePercent: 21.1 },
 ]
 
+// Memoized token item to prevent unnecessary re-renders
+const TickerItemDisplay = memo(function TickerItemDisplay({
+  token,
+  formatPrice
+}: {
+  token: TickerItem
+  formatPrice: (price: number) => string
+}) {
+  return (
+    <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 border-r border-border/50 whitespace-nowrap">
+      <div className="font-bold text-xs sm:text-sm text-primary">{token.symbol}</div>
+      <div className="font-mono text-xs sm:text-sm">{formatPrice(token.price)}</div>
+      <div
+        className={`flex items-center gap-1 text-[10px] sm:text-xs font-mono font-bold ${
+          token.changePercent >= 0 ? "text-chart-1" : "text-destructive"
+        }`}
+        aria-label={`${token.changePercent >= 0 ? 'Up' : 'Down'} ${Math.abs(token.changePercent).toFixed(1)} percent`}
+      >
+        {token.changePercent >= 0 ? <TrendingUp className="w-3 h-3" aria-hidden="true" /> : <TrendingDown className="w-3 h-3" aria-hidden="true" />}
+        {token.changePercent >= 0 ? "+" : ""}
+        {token.changePercent.toFixed(1)}%
+      </div>
+    </div>
+  )
+})
+
 export function LiveTicker() {
   const [tokens, setTokens] = useState(initialTokens)
   const [isPaused, setIsPaused] = useState(false)
@@ -30,6 +56,7 @@ export function LiveTicker() {
   useEffect(() => {
     if (isPaused) return
 
+    // Reduced frequency from 2s to 5s for better performance
     const interval = setInterval(() => {
       setTokens((prev) =>
         prev.map((token) => {
@@ -46,46 +73,42 @@ export function LiveTicker() {
           }
         }),
       )
-    }, 2000)
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [isPaused])
 
-  const duplicatedTokens = [...tokens, ...tokens]
+  // Memoize duplicated tokens array
+  const duplicatedTokens = useMemo(() => [...tokens, ...tokens], [tokens])
 
-  const formatPrice = (price: number) => {
+  // Memoize formatPrice function
+  const formatPrice = useCallback((price: number) => {
     if (price < 0.0001) return `$${price.toFixed(8)}`
     if (price < 0.01) return `$${price.toFixed(6)}`
     if (price < 1) return `$${price.toFixed(4)}`
     return `$${price.toFixed(2)}`
-  }
+  }, [])
 
   return (
     <div
       className="relative overflow-hidden bg-card border-y-2 border-primary py-2 sm:py-3"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      role="marquee"
+      aria-label="Live cryptocurrency price ticker"
     >
       <div className="flex animate-ticker hover:animation-pause">
         {duplicatedTokens.map((token, index) => (
-          <div
+          <TickerItemDisplay
             key={`${token.symbol}-${index}`}
-            className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 border-r border-border/50 whitespace-nowrap"
-          >
-            <div className="font-bold text-xs sm:text-sm text-primary">{token.symbol}</div>
-            <div className="font-mono text-xs sm:text-sm">{formatPrice(token.price)}</div>
-            <div
-              className={`flex items-center gap-1 text-[10px] sm:text-xs font-mono font-bold ${
-                token.changePercent >= 0 ? "text-chart-1" : "text-destructive"
-              }`}
-            >
-              {token.changePercent >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-              {token.changePercent >= 0 ? "+" : ""}
-              {token.changePercent.toFixed(1)}%
-            </div>
-          </div>
+            token={token}
+            formatPrice={formatPrice}
+          />
         ))}
       </div>
     </div>
   )
 }
+
+// Export memoized version
+export const MemoizedLiveTicker = memo(LiveTicker)

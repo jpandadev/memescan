@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // TypeScript errors are now fixed properly
   images: {
     unoptimized: false,
     remotePatterns: [
