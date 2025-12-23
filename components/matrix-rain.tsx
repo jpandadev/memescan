@@ -1,8 +1,58 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import { MatrixRainCSS } from "./matrix-rain-css"
 
+/**
+ * Adaptive Matrix Rain Effect
+ *
+ * Automatically chooses between:
+ * - CSS version (default): Lightweight, 60fps on any device
+ * - Canvas version: Full effect, only on high-performance devices
+ *
+ * Detection based on:
+ * - Hardware concurrency (CPU cores)
+ * - Device memory
+ * - Mobile vs desktop
+ */
 export function MatrixRain() {
+  const [useCanvas, setUseCanvas] = useState(false)
+
+  useEffect(() => {
+    // Detect device performance
+    const isHighPerformance = (): boolean => {
+      // Mobile devices: always use CSS
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return false
+      }
+
+      // Check hardware concurrency (CPU cores)
+      const cores = navigator.hardwareConcurrency || 2
+      if (cores < 4) return false
+
+      // Check device memory if available
+      const memory = (navigator as { deviceMemory?: number }).deviceMemory
+      if (memory && memory < 4) return false
+
+      // Desktop with 4+ cores and 4GB+ RAM: use canvas
+      return true
+    }
+
+    setUseCanvas(isHighPerformance())
+  }, [])
+
+  // Default to CSS (SSR-safe, lightweight)
+  if (!useCanvas) {
+    return <MatrixRainCSS />
+  }
+
+  return <MatrixRainCanvas />
+}
+
+/**
+ * Canvas-based Matrix Rain (heavy, for high-end devices only)
+ */
+function MatrixRainCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
