@@ -2,8 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { AlertTriangle, Rocket, Shield, Clock } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { AlertTriangle, Rocket, Shield, Clock, Music } from "lucide-react"
 import { useTelegram } from "./telegram-provider"
+
+// White Tiger ecosystem integration
+const ANTHEM_BOT_URL = "https://t.me/MSUCOBot"
 
 interface NewToken {
   name: string
@@ -23,6 +27,12 @@ const newLaunches: NewToken[] = [
 
 export function NewLaunches() {
   const { hapticFeedback, showAlert } = useTelegram()
+
+  const handleCreateAnthem = (symbol: string, name: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    hapticFeedback("medium")
+    window.open(`${ANTHEM_BOT_URL}?start=anthem_${symbol}_${encodeURIComponent(name)}`, "_blank")
+  }
 
   const getSafetyColor = (safety: NewToken["safety"]) => {
     switch (safety) {
@@ -84,9 +94,20 @@ export function NewLaunches() {
                     </Badge>
                   )}
                 </div>
-                <div className="text-xs font-mono">
-                  <span className="text-muted-foreground">Liq: </span>
-                  <span className="text-primary font-bold">{token.liquidity}</span>
+                <div className="flex items-center gap-2">
+                  <div className="text-xs font-mono">
+                    <span className="text-muted-foreground">Liq: </span>
+                    <span className="text-primary font-bold">{token.liquidity}</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-6 px-2 text-[10px] gap-1 border-chart-3/50 hover:bg-chart-3/20 hover:text-chart-3 hover:border-chart-3"
+                    onClick={(e) => handleCreateAnthem(token.symbol, token.name, e)}
+                  >
+                    <Music className="w-3 h-3" />
+                    Anthem
+                  </Button>
                 </div>
               </div>
             </div>

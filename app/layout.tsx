@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Orbitron } from "next/font/google"
 import { TelegramProvider } from "@/components/telegram-provider"
 import { MatrixRain } from "@/components/matrix-rain"
+import { EcosystemFooter } from "@/components/ecosystem-footer"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -83,7 +84,10 @@ export default function RootLayout({
       <body className={`font-sans antialiased ${_orbitron.variable}`}>
         <MatrixRain />
         <TelegramProvider>
-          <div className="relative z-10">{children}</div>
+          <div className="relative z-10 min-h-screen flex flex-col">
+            <div className="flex-1">{children}</div>
+            <EcosystemFooter />
+          </div>
         </TelegramProvider>
       </body>
     </html>

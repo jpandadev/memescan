@@ -2,8 +2,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { TrendingUp, TrendingDown, AlertTriangle, Shield, Flame } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TrendingUp, TrendingDown, AlertTriangle, Shield, Flame, Music } from "lucide-react"
 import { useTelegram } from "./telegram-provider"
+
+// White Tiger ecosystem integration
+const ANTHEM_BOT_URL = "https://t.me/MSUCOBot"
 
 interface MemeToken {
   rank: number
@@ -47,6 +51,12 @@ const trendingMemes: MemeToken[] = [
 
 export function TrendingMemes() {
   const { hapticFeedback } = useTelegram()
+
+  const handleCreateAnthem = (symbol: string, name: string, e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent row click
+    hapticFeedback("medium")
+    window.open(`${ANTHEM_BOT_URL}?start=anthem_${symbol}_${encodeURIComponent(name)}`, "_blank")
+  }
 
   const getSafetyBadge = (safety: MemeToken["safety"]) => {
     switch (safety) {
@@ -116,7 +126,18 @@ export function TrendingMemes() {
                   {token.change >= 0 ? "+" : ""}
                   {token.change.toFixed(1)}%
                 </div>
-                {getSafetyBadge(token.safety)}
+                <div className="flex items-center gap-1">
+                  {getSafetyBadge(token.safety)}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 w-5 p-0 hover:bg-primary/20 hover:text-primary"
+                    onClick={(e) => handleCreateAnthem(token.symbol, token.name, e)}
+                    title={`Create ${token.symbol} anthem`}
+                  >
+                    <Music className="w-3 h-3" />
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
