@@ -60,3 +60,4 @@ NEXT_PUBLIC_TON_API_KEY=your-tonapi-key
 ## License
 
 MIT - MemeSeal Team 2025
+
