@@ -58,7 +58,7 @@ export function CryptoOrderBook({ symbol = "BTC/USD", basePrice = 43782 }: { sym
       <CardHeader>
         <CardTitle className="text-sm font-bold flex items-center justify-between">
           <span>ORDER BOOK</span>
-          <span className="text-xs font-mono text-muted-foreground">{symbol}</span>
+          <span className="text-xs font-mono text-muted-foreground">{symbol} · SIMULATED</span>
         </CardTitle>
       </CardHeader>
       <CardContent>

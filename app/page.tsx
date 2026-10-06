@@ -18,23 +18,23 @@ export default function MemeScanPage() {
 
         <QuickActions />
 
-        {/* Quick Stats */}
+        {/* Preview status: what is and isn't real on this site */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
           <div className="bg-card border border-primary/50 rounded-lg p-3">
-            <div className="text-[10px] font-mono text-muted-foreground mb-1">TOKENS SCANNED</div>
-            <div className="text-lg sm:text-xl font-bold text-primary">2,847</div>
+            <div className="text-[10px] font-mono text-muted-foreground mb-1">SCANNER</div>
+            <div className="text-lg sm:text-xl font-bold text-primary">PREVIEW</div>
           </div>
           <div className="bg-card border border-border rounded-lg p-3">
-            <div className="text-[10px] font-mono text-muted-foreground mb-1">RUGS DETECTED</div>
-            <div className="text-lg sm:text-xl font-bold text-destructive">127</div>
+            <div className="text-[10px] font-mono text-muted-foreground mb-1">RUG CHECKS</div>
+            <div className="text-lg sm:text-xl font-bold text-chart-5">NOT LIVE</div>
           </div>
           <div className="bg-card border border-border rounded-lg p-3">
-            <div className="text-[10px] font-mono text-muted-foreground mb-1">GEMS FOUND</div>
-            <div className="text-lg sm:text-xl font-bold text-chart-1">48</div>
+            <div className="text-[10px] font-mono text-muted-foreground mb-1">TOKEN DATA</div>
+            <div className="text-lg sm:text-xl font-bold text-chart-1">SAMPLE</div>
           </div>
           <div className="bg-card border border-border rounded-lg p-3">
-            <div className="text-[10px] font-mono text-muted-foreground mb-1">TON PRICE</div>
-            <div className="text-lg sm:text-xl font-bold">$2.45</div>
+            <div className="text-[10px] font-mono text-muted-foreground mb-1">PRICES</div>
+            <div className="text-lg sm:text-xl font-bold">NOT LIVE</div>
           </div>
         </div>
 

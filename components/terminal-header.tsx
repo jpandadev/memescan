@@ -70,8 +70,8 @@ export function TerminalHeader() {
             </div>
 
             <div className="hidden md:flex items-center gap-1 ml-4">
-              <div className="px-2 sm:px-3 py-1 bg-primary/20 border border-primary/50 rounded text-[10px] sm:text-xs font-bold text-primary">
-                TON LIVE
+              <div className="px-2 sm:px-3 py-1 bg-chart-5/20 border border-chart-5/50 rounded text-[10px] sm:text-xs font-bold text-chart-5">
+                PREVIEW
               </div>
             </div>
           </div>

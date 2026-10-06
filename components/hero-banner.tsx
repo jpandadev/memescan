@@ -28,7 +28,7 @@ export function HeroBanner() {
           </Badge>
           <Badge variant="outline" className="border-accent text-accent text-[10px] sm:text-xs">
             <Shield className="w-3 h-3 mr-1" />
-            RUG DETECTOR
+            DESIGN PREVIEW
           </Badge>
         </div>
 
@@ -39,14 +39,14 @@ export function HeroBanner() {
         </h2>
 
         <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-md mb-3 sm:mb-4 line-clamp-2">
-          Track trending tokens. Detect rug pulls. Find the next 100x gem on TON.
+          A preview of a TON meme coin dashboard. Every token and number here is sample data.
         </p>
 
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <a href="https://t.me/MemeScanTON_bot" target="_blank" rel="noopener noreferrer">
             <Button size="sm" className="font-bold text-xs" onClick={() => hapticFeedback("medium")}>
               <TrendingUp className="w-3 h-3 mr-1" />
-              SCAN TOKENS
+              TELEGRAM BOT
             </Button>
           </a>
           <a href="https://x.com/MemeSealTON" target="_blank" rel="noopener noreferrer">

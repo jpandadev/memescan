@@ -18,11 +18,13 @@ interface NewToken {
   locked: boolean
 }
 
+// Fictional example launches: not real projects, and the safety levels are
+// made up to show the layout. Never pair them with a real token or address.
 const newLaunches: NewToken[] = [
-  { name: "RocketPepe", symbol: "RPEPE", launchedAt: "2m ago", liquidity: "$45K", safety: "medium", locked: true },
-  { name: "TONDoge", symbol: "TDOGE", launchedAt: "15m ago", liquidity: "$120K", safety: "high", locked: true },
-  { name: "MoonCat", symbol: "MCAT", launchedAt: "32m ago", liquidity: "$8K", safety: "low", locked: false },
-  { name: "DiamondHands", symbol: "DHAND", launchedAt: "1h ago", liquidity: "$230K", safety: "high", locked: true },
+  { name: "Example Lily", symbol: "EX-LILY", launchedAt: "2m ago", liquidity: "$45K", safety: "medium", locked: true },
+  { name: "Example Pond", symbol: "EX-POND", launchedAt: "15m ago", liquidity: "$120K", safety: "high", locked: true },
+  { name: "Example Tadpole", symbol: "EX-TADPOLE", launchedAt: "32m ago", liquidity: "$8K", safety: "low", locked: false },
+  { name: "Example Lotus", symbol: "EX-LOTUS", launchedAt: "1h ago", liquidity: "$230K", safety: "high", locked: true },
 ]
 
 export function NewLaunches() {
@@ -51,7 +53,7 @@ export function NewLaunches() {
         <CardTitle className="text-lg font-bold flex items-center gap-2">
           <Rocket className="w-5 h-5 text-chart-3" />
           <span>NEW LAUNCHES</span>
-          <Badge className="bg-chart-3/20 text-chart-3 text-[10px] animate-pulse">ALERT</Badge>
+          <Badge className="bg-chart-5/20 text-chart-5 text-[10px]">EXAMPLE</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -63,7 +65,7 @@ export function NewLaunches() {
               onClick={() => {
                 hapticFeedback("medium")
                 showAlert(
-                  `${token.name} ($${token.symbol})\nLiquidity: ${token.liquidity}\nSafety: ${token.safety.toUpperCase()}`,
+                  `${token.name} ($${token.symbol}) - fictional example\nLiquidity: ${token.liquidity}\nSafety: ${token.safety.toUpperCase()}`,
                 )
               }}
             >

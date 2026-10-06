@@ -66,6 +66,9 @@ export function CryptoTradingChart({ symbol = "BTC/USD", basePrice = 43782 }: { 
             <div className="flex items-center gap-2 mb-2">
               <Bitcoin className="w-6 h-6 text-primary" />
               <h2 className="text-2xl font-bold">{symbol}</h2>
+              <span className="px-1.5 py-0.5 rounded bg-chart-5/20 text-chart-5 text-[10px] font-mono font-bold">
+                SIMULATED
+              </span>
               {percentChange > 5 && <Rocket className="w-5 h-5 text-primary animate-bounce" />}
             </div>
             <div className="flex items-baseline gap-3">
