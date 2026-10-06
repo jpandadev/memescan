@@ -1,14 +1,17 @@
 "use server"
 
-// Server-side only - never expose API keys to client
+// Server-side only - never expose API keys to client. Read from the environment
+// and nowhere else; without it the API Ninjas helpers return their empty
+// fallback instead of making a request that can only fail.
 const API_NINJAS_KEY = process.env.API_NINJAS_KEY || ""
 
 // Validate we have the key in production
 if (!API_NINJAS_KEY && process.env.NODE_ENV === "production") {
-  console.warn("[MemeScan] API_NINJAS_KEY not set - API calls will fail")
+  console.warn("[MemeScan] API_NINJAS_KEY not set - API Ninjas data will be empty")
 }
 
 export async function fetchInterestRates() {
+  if (!API_NINJAS_KEY) return []
   try {
     const response = await fetch("https://api.api-ninjas.com/v1/interestrate", {
       headers: {
@@ -70,6 +73,7 @@ export async function fetchForexRates() {
 }
 
 export async function fetchCommodityPrices(commodity = "crude_oil") {
+  if (!API_NINJAS_KEY) return null
   try {
     const response = await fetch(`https://api.api-ninjas.com/v1/commodityprice?name=${commodity}`, {
       headers: {
@@ -88,6 +92,7 @@ export async function fetchCommodityPrices(commodity = "crude_oil") {
 }
 
 export async function fetchCryptoPrice(symbol = "BTCUSDT") {
+  if (!API_NINJAS_KEY) return null
   try {
     const response = await fetch(`https://api.api-ninjas.com/v1/cryptoprice?symbol=${symbol}`, {
       headers: {
@@ -106,6 +111,7 @@ export async function fetchCryptoPrice(symbol = "BTCUSDT") {
 }
 
 export async function fetchStockPrice(ticker: string) {
+  if (!API_NINJAS_KEY) return null
   try {
     const response = await fetch(`https://api.api-ninjas.com/v1/stockprice?ticker=${ticker}`, {
       headers: {

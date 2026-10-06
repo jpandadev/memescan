@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, memo, useMemo, useCallback } from "react"
+import { memo } from "react"
 import { TrendingUp, TrendingDown } from "lucide-react"
 
 interface TickerItem {
@@ -10,7 +10,9 @@ interface TickerItem {
   changePercent: number
 }
 
-const initialTokens: TickerItem[] = [
+// Static sample prices, not market data. Deliberately not animated: random
+// drift on real token names reads as a live quote.
+const sampleTokens: TickerItem[] = [
   { symbol: "TON", price: 2.45, change: 0.28, changePercent: 12.5 },
   { symbol: "NOT", price: 0.0089, change: 0.0028, changePercent: 45.2 },
   { symbol: "DOGS", price: 0.00042, change: -0.00001, changePercent: -3.2 },
@@ -49,53 +51,22 @@ const TickerItemDisplay = memo(function TickerItemDisplay({
   )
 })
 
+// Duplicated so the CSS scroll loops seamlessly
+const duplicatedTokens = [...sampleTokens, ...sampleTokens]
+
+function formatPrice(price: number) {
+  if (price < 0.0001) return `$${price.toFixed(8)}`
+  if (price < 0.01) return `$${price.toFixed(6)}`
+  if (price < 1) return `$${price.toFixed(4)}`
+  return `$${price.toFixed(2)}`
+}
+
 export function LiveTicker() {
-  const [tokens, setTokens] = useState(initialTokens)
-  const [isPaused, setIsPaused] = useState(false)
-
-  useEffect(() => {
-    if (isPaused) return
-
-    // Reduced frequency from 2s to 5s for better performance
-    const interval = setInterval(() => {
-      setTokens((prev) =>
-        prev.map((token) => {
-          const priceChange = (Math.random() - 0.5) * token.price * 0.02
-          const newPrice = Math.max(0.000001, token.price + priceChange)
-          const newChange = token.change + priceChange
-          const newChangePercent = (newChange / (newPrice - newChange)) * 100
-
-          return {
-            ...token,
-            price: newPrice,
-            change: newChange,
-            changePercent: Math.max(-99, Math.min(999, newChangePercent)),
-          }
-        }),
-      )
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [isPaused])
-
-  // Memoize duplicated tokens array
-  const duplicatedTokens = useMemo(() => [...tokens, ...tokens], [tokens])
-
-  // Memoize formatPrice function
-  const formatPrice = useCallback((price: number) => {
-    if (price < 0.0001) return `$${price.toFixed(8)}`
-    if (price < 0.01) return `$${price.toFixed(6)}`
-    if (price < 1) return `$${price.toFixed(4)}`
-    return `$${price.toFixed(2)}`
-  }, [])
-
   return (
     <div
       className="relative overflow-hidden bg-card border-y-2 border-primary py-2 sm:py-3"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       role="marquee"
-      aria-label="Live cryptocurrency price ticker"
+      aria-label="Sample price ticker (demo data, not live prices)"
     >
       <div className="flex animate-ticker hover:animation-pause">
         {duplicatedTokens.map((token, index) => (

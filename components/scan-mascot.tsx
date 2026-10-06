@@ -26,7 +26,7 @@ export function ScanMascot() {
               <span className="text-primary">MEET SCAN</span>
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Your tech-savvy frog companion. Always watching the charts, detecting rugs, and celebrating your gains.
+              Your tech-savvy frog guide to this preview. The charts and tokens SCAN shows you are samples; real token checks are not live yet.
             </p>
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
               <a href="https://x.com/MemeSealTON" target="_blank" rel="noopener noreferrer">

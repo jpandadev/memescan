@@ -1,7 +1,7 @@
 {
-  "name": "MemeScan - Bloomberg for Meme Coins",
+  "name": "MemeScan - Meme Coin Dashboard Preview",
   "short_name": "MemeScan",
-  "description": "The ultimate meme coin scanner for TON blockchain. Track trending tokens, detect rug pulls, find gems, and race in CryptoKart!",
+  "description": "A design preview of a meme coin dashboard for TON, shown with sample data. Not live market data, not financial advice.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

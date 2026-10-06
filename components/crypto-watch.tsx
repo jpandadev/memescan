@@ -3,7 +3,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Zap } from "lucide-react"
-import { useEffect, useState } from "react"
 import { useTelegram } from "./telegram-provider"
 
 interface TokenData {
@@ -15,32 +14,17 @@ interface TokenData {
   mcap: string
 }
 
+// Static sample figures, not market data. Deliberately not animated: random
+// drift on real token names reads as a live quote.
+const tokens: TokenData[] = [
+  { name: "Toncoin", symbol: "TON", price: "$2.45", change: "+12.5%", positive: true, mcap: "$8.4B" },
+  { name: "Notcoin", symbol: "NOT", price: "$0.0089", change: "+45.2%", positive: true, mcap: "$890M" },
+  { name: "Dogs", symbol: "DOGS", price: "$0.00042", change: "-3.2%", positive: false, mcap: "$420M" },
+  { name: "Hamster", symbol: "HMSTR", price: "$0.0037", change: "+8.7%", positive: true, mcap: "$310M" },
+]
+
 export function CryptoWatch() {
   const { hapticFeedback } = useTelegram()
-  const [tokens, setTokens] = useState<TokenData[]>([
-    { name: "Toncoin", symbol: "TON", price: "$2.45", change: "+12.5%", positive: true, mcap: "$8.4B" },
-    { name: "Notcoin", symbol: "NOT", price: "$0.0089", change: "+45.2%", positive: true, mcap: "$890M" },
-    { name: "Dogs", symbol: "DOGS", price: "$0.00042", change: "-3.2%", positive: false, mcap: "$420M" },
-    { name: "Hamster", symbol: "HMSTR", price: "$0.0037", change: "+8.7%", positive: true, mcap: "$310M" },
-  ])
-
-  // Simulate price updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTokens((prev) =>
-        prev.map((token) => {
-          const changeVal = (Math.random() - 0.5) * 5
-          const isPositive = changeVal >= 0
-          return {
-            ...token,
-            change: `${isPositive ? "+" : ""}${changeVal.toFixed(1)}%`,
-            positive: isPositive,
-          }
-        }),
-      )
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <Card className="border-2">
@@ -48,7 +32,7 @@ export function CryptoWatch() {
         <CardTitle className="text-lg font-bold flex items-center gap-2">
           <Zap className="w-5 h-5 text-primary" />
           <span className="truncate">TOP TON TOKENS</span>
-          <Badge className="bg-primary/20 text-primary text-[10px]">LIVE</Badge>
+          <Badge className="bg-chart-5/20 text-chart-5 text-[10px]">SAMPLE</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>

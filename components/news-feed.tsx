@@ -2,10 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Newspaper, TrendingUp, TrendingDown, Flame } from "lucide-react"
 
+// Made-up sample headlines to show the layout. They are not real reporting, so
+// they are not attributed to real publications.
 const newsItems = [
   {
     title: "Tesla Surges 12% After Announcing Record Q4 Deliveries",
-    source: "Bloomberg",
+    source: "Sample source",
     time: "5 min ago",
     sentiment: "bullish",
     impact: "high",
@@ -15,7 +17,7 @@ const newsItems = [
   },
   {
     title: "Federal Reserve Signals Potential Rate Cuts in 2024",
-    source: "Reuters",
+    source: "Sample source",
     time: "23 min ago",
     sentiment: "bullish",
     impact: "high",
@@ -25,7 +27,7 @@ const newsItems = [
   },
   {
     title: "GameStop Mania Returns: Retail Traders Push GME Up 45%",
-    source: "WSJ",
+    source: "Sample source",
     time: "1 hour ago",
     sentiment: "bullish",
     impact: "medium",
@@ -35,7 +37,7 @@ const newsItems = [
   },
   {
     title: "Bitcoin Tests $44K as Crypto Markets Rally Across the Board",
-    source: "CoinDesk",
+    source: "Sample source",
     time: "2 hours ago",
     sentiment: "bullish",
     impact: "medium",
@@ -45,7 +47,7 @@ const newsItems = [
   },
   {
     title: "NVIDIA Announces Next-Gen AI Chips, Stock Jumps 8%",
-    source: "TechCrunch",
+    source: "Sample source",
     time: "3 hours ago",
     sentiment: "bullish",
     impact: "high",
@@ -55,7 +57,7 @@ const newsItems = [
   },
   {
     title: "Oil Prices Surge on Middle East Supply Concerns",
-    source: "Bloomberg",
+    source: "Sample source",
     time: "4 hours ago",
     sentiment: "neutral",
     impact: "medium",
@@ -65,7 +67,7 @@ const newsItems = [
   },
   {
     title: "JPMorgan Reports Blockbuster Earnings, Beats Estimates",
-    source: "CNBC",
+    source: "Sample source",
     time: "5 hours ago",
     sentiment: "bullish",
     impact: "high",
@@ -74,7 +76,7 @@ const newsItems = [
   },
   {
     title: "Meme Stock AMC Entertainment Rallies 28% on Social Media Hype",
-    source: "MarketWatch",
+    source: "Sample source",
     time: "6 hours ago",
     sentiment: "bullish",
     impact: "low",
@@ -89,7 +91,7 @@ export function NewsFeed() {
       <CardHeader>
         <CardTitle className="text-xl font-bold flex items-center gap-2">
           <Newspaper className="w-5 h-5 text-primary" />
-          BREAKING NEWS
+          SAMPLE HEADLINES
         </CardTitle>
       </CardHeader>
       <CardContent>

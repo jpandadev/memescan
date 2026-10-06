@@ -20,7 +20,7 @@ export default function NewsPage() {
               <span className="text-primary">◉</span>
               MARKET INTELLIGENCE
             </h1>
-            <p className="text-sm text-muted-foreground font-mono mt-1">BREAKING NEWS • SOCIAL BUZZ • MARKET PULSE</p>
+            <p className="text-sm text-muted-foreground font-mono mt-1">SAMPLE HEADLINES • SOCIAL BUZZ • MARKET PULSE</p>
           </div>
         </div>
 
