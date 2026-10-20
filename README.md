@@ -1,4 +1,10 @@
-# MemeScan - design preview with sample data
+# LEGACY: MemeScan - design preview with sample data
+
+> **LEGACY REPOSITORY. Not under active development.**
+> The only active repo is **[cherishwins/x402-facilitator](https://github.com/cherishwins/x402-facilitator)**. Work there.
+> MemeScan: a design preview with sample data. No live data and no users.
+> Marked legacy 20 October 2026 so this repo stops being opened by mistake. Archive it in Settings when convenient.
+
 
 > Part of the **MemeSeal Ecosystem**
 
